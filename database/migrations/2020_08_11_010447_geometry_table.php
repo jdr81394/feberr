@@ -16,7 +16,7 @@ class GeometryTable extends Migration
         //
         Schema::create("geometry", function(Blueprint $table) { 
             $table->id();
-            $table->enum("geometry", ['Geometry 1', 'Geometry 2']);
+            $table->string("geometry");
             $table->timestamps();
         });
     }

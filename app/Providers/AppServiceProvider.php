@@ -19,6 +19,7 @@ use URL;
 use Illuminate\Support\Facades\Config;
 use Cookie;
 use Illuminate\Support\Facades\Crypt;
+use Feberr\Models\RobertsItems;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -55,6 +56,18 @@ class AppServiceProvider extends ServiceProvider
 		$getWell['type'] = Items::gettypeStatus();
 		View::share('getWell', $getWell);
 		
+		// Jake problem here
+
+		// $allMediaTypes = RobertsItems::getAllMediaTypes();
+		
+		// $allMediaTypes = Items::getAllMediaTypes();
+		// View::share('media_type', $allMediaTypes);
+
+		// $allUnwrappedUvs = Items::getAllUnwrappedUvs();
+		// View::share('unwrapped_uvs', $allUnwrappedUvs);
+
+		$allGeometry = Items::getAllGeometry();
+		View::share("geometry", $allGeometry);
 		
 		$allsettings = Settings::allSettings();
 		View::share('allsettings', $allsettings);

@@ -9,6 +9,9 @@ use Feberr\Models\Items;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use Exception;
+
 /*use Intervention\Image\Image;*/
 use Illuminate\Support\Facades\File;
 use Auth;
@@ -20,6 +23,8 @@ use Twocheckout;
 use Twocheckout_Charge;
 use Twocheckout_Error;
 use Paystack;
+
+use Feberr\Models\RobertsItems;
 
 class ItemController extends Controller
 {
@@ -369,9 +374,9 @@ class ItemController extends Controller
 		$layered = array('Yes','No');
 		$adobe = explode(',',$allattributes->cs_version);
 		$package_four = explode(',',$allattributes->package_includes_four);
+		$all_geometry = Items::getAllGeometry();
 		
-		
-		$data = array('item_type_text' => $item_type_text, 'compatible_one' => $compatible_one, 'package_one' => $package_one, 'package_two' => $package_two, 'columns' => $columns, 'layouts' => $layouts, 'package_three' => $package_three, 'layered' => $layered, 'adobe' => $adobe,'package_four' => $package_four);
+		$data = array('geometry'=>$all_geometry, 'item_type_text' => $item_type_text, 'compatible_one' => $compatible_one, 'package_one' => $package_one, 'package_two' => $package_two, 'columns' => $columns, 'layouts' => $layouts, 'package_three' => $package_three, 'layered' => $layered, 'adobe' => $adobe,'package_four' => $package_four);
         return view('upload-item')->with($data);
     }
 	
@@ -828,403 +833,438 @@ class ItemController extends Controller
 	
 	}
 	
+
+
+
+	public function save_items(Request $request) {
+
+		try {
+
+			Log::info("Request: " . $request);
+			$item = new RobertsItems;
+	   		$item->name = $request->input('product_name');
+			$item->description = htmlentities($request->input('product_desc'));
+			$item->geometry = $request->geometry_type;
+			$item->price = $request->price;
+			Log::info("item: " . $item);
+			$item->polygons = $request->polygons;
+			$item->vertices = $request->vertices;
+			$item->textures = $request->textures;
+			$item->materials = $request->materials;
+			$item->rigged = $request->rigged;
+			$item->animated = $request->animated;
+			$item->uvs_Mapped = $request->uv_mapped;
+			$item->unwrapped_uvs = $request->unwrapped_uvs;
+
+			$item->save();
+			
+		} catch(Exception $e) {
+			Log::info("Error: " . $e);
+		}
+
+
+	}
+
+
+
+
 	
 	
 	
 	
-	public function save_items(Request $request)
-	{
+	// public function save_items(Request $request)
+	// {
 	   
-	   $item_name = $request->input('item_name');
-	   $item_slug = $this->item_slug($item_name);
-	   $item_desc = htmlentities($request->input('item_desc'));
-	   $item_category = $request->input('item_category');
+	//    $item_name = $request->input('item_name');
+	//    $item_slug = $this->item_slug($item_name);
+	//    $item_desc = htmlentities($request->input('item_desc'));
+	//    $item_category = $request->input('item_category');
 	   
-        $split = explode("_", $item_category);
+    //     $split = explode("_", $item_category);
          
-       $cat_id = $split[1];
-	   $cat_name = $split[0];
+    //    $cat_id = $split[1];
+	//    $cat_name = $split[0];
 	   
-	   $item_type = $request->input('item_type');
-	   $columns = $request->input('columns');
-	   $layout = $request->input('layout');
-	   $layered = $request->input('layered');
-	   $cs_version = $request->input('cs_version');
-	   $print_dimensions = $request->input('print_dimensions');
-	   $pixel_dimensions = $request->input('pixel_dimensions');
-	   $demo_url = $request->input('demo_url');
-	   $item_tags = $request->input('item_tags');
-	   $regular_price = $request->input('regular_price');
-	   $item_shortdesc = $request->input('item_shortdesc');
-	   $free_download = $request->input('free_download');
-	   $video_url = $request->input('video_url');
-	   $created_item = date('Y-m-d H:i:s');
-	   $updated_item = date('Y-m-d H:i:s');
-	   
-	   
-	   if(!empty($request->input('extended_price')))
-	   {
-	   $extended_price = $request->input('extended_price');
-	   }
-	   else
-	   {
-	    $extended_price = 0;
-	   }
-	   
-	   if(!empty($request->input('future_update')))
-	   {
-	   $future_update = $request->input('future_update');
-	   }
-	   else
-	   {
-	   $future_update = 0;
-	   }
-	   
-	   if(!empty($request->input('item_support')))
-	   {
-	   $item_support = $request->input('item_support');
-	   }
-	   else
-	   {
-	   $item_support = 0;
-	   }
-	   $item_flash_request = $request->input('item_flash_request');
-	   
-	   $user_id = $request->input('user_id');
-	   $item_token = $this->generateRandomString();
-	   $allsettings = Settings::allSettings();
-	   $item_approval = $allsettings->item_approval;
-	   
-	   if($item_approval == 1)
-	   {
-	      $item_status = 1;
-		  $item_approve_status = "Your item updated successfully.";
-	   }
-	   else
-	   {
-	      $item_status = 0;
-		  $item_approve_status = "Thanks for your submission. Once admin will approved your item. will publish on our marketplace.";
-	   }
+	//    $item_type = $request->input('item_type');
+	//    $columns = $request->input('columns');
+	//    $layout = $request->input('layout');
+	//    $layered = $request->input('layered');
+	//    $cs_version = $request->input('cs_version');
+	//    $print_dimensions = $request->input('print_dimensions');
+	//    $pixel_dimensions = $request->input('pixel_dimensions');
+	//    $demo_url = $request->input('demo_url');
+	//    $item_tags = $request->input('item_tags');
+	//    $regular_price = $request->input('regular_price');
+	//    $item_shortdesc = $request->input('item_shortdesc');
+	//    $free_download = $request->input('free_download');
+	//    $video_url = $request->input('video_url');
+	//    $created_item = date('Y-m-d H:i:s');
+	//    $updated_item = date('Y-m-d H:i:s');
 	   
 	   
-	   if(!empty($request->input('compatible_browsers')))
-	   {
+	//    if(!empty($request->input('extended_price')))
+	//    {
+	//    $extended_price = $request->input('extended_price');
+	//    }
+	//    else
+	//    {
+	//     $extended_price = 0;
+	//    }
+	   
+	//    if(!empty($request->input('future_update')))
+	//    {
+	//    $future_update = $request->input('future_update');
+	//    }
+	//    else
+	//    {
+	//    $future_update = 0;
+	//    }
+	   
+	//    if(!empty($request->input('item_support')))
+	//    {
+	//    $item_support = $request->input('item_support');
+	//    }
+	//    else
+	//    {
+	//    $item_support = 0;
+	//    }
+	//    $item_flash_request = $request->input('item_flash_request');
+	   
+	//    $user_id = $request->input('user_id');
+	//    $item_token = $this->generateRandomString();
+	//    $allsettings = Settings::allSettings();
+	//    $item_approval = $allsettings->item_approval;
+	   
+	//    if($item_approval == 1)
+	//    {
+	//       $item_status = 1;
+	// 	  $item_approve_status = "Your item updated successfully.";
+	//    }
+	//    else
+	//    {
+	//       $item_status = 0;
+	// 	  $item_approve_status = "Thanks for your submission. Once admin will approved your item. will publish on our marketplace.";
+	//    }
+	   
+	   
+	//    if(!empty($request->input('compatible_browsers')))
+	//    {
 	      
-		  $browser1 = "";
-		  foreach($request->input('compatible_browsers') as $browser)
-		  {
-		     $browser1 .= $browser.',';
-		  }
-		  $browser_one = rtrim($browser1,",");
+	// 	  $browser1 = "";
+	// 	  foreach($request->input('compatible_browsers') as $browser)
+	// 	  {
+	// 	     $browser1 .= $browser.',';
+	// 	  }
+	// 	  $browser_one = rtrim($browser1,",");
 		  
-	   }
-	   else
-	   {
-	     $browser_one = "";
-	   }
+	//    }
+	//    else
+	//    {
+	//      $browser_one = "";
+	//    }
 	   
 	   
-	   if(!empty($request->input('package_includes')))
-	   {
+	//    if(!empty($request->input('package_includes')))
+	//    {
 	      
-		  $package1 = "";
-		  foreach($request->input('package_includes') as $package)
-		  {
-		     $package1 .= $package.',';
-		  }
-		  $package_one = rtrim($package1,",");
+	// 	  $package1 = "";
+	// 	  foreach($request->input('package_includes') as $package)
+	// 	  {
+	// 	     $package1 .= $package.',';
+	// 	  }
+	// 	  $package_one = rtrim($package1,",");
 		  
-	   }
-	   else
-	   {
-	     $package_one = "";
-	   }
+	//    }
+	//    else
+	//    {
+	//      $package_one = "";
+	//    }
 	   
 	   
 	   
-	   if(!empty($request->input('package_includes_two')))
-	   {
+	//    if(!empty($request->input('package_includes_two')))
+	//    {
 	      
-		  $package2 = "";
-		  foreach($request->input('package_includes_two') as $package)
-		  {
-		     $package2 .= $package.',';
-		  }
-		  $package_two = rtrim($package2,",");
+	// 	  $package2 = "";
+	// 	  foreach($request->input('package_includes_two') as $package)
+	// 	  {
+	// 	     $package2 .= $package.',';
+	// 	  }
+	// 	  $package_two = rtrim($package2,",");
 		  
-	   }
-	   else
-	   {
-	     $package_two = "";
-	   }
+	//    }
+	//    else
+	//    {
+	//      $package_two = "";
+	//    }
 	   
 	   
-	   if(!empty($request->input('package_includes_three')))
-	   {
+	//    if(!empty($request->input('package_includes_three')))
+	//    {
 	      
-		  $package3 = "";
-		  foreach($request->input('package_includes_three') as $package)
-		  {
-		     $package3 .= $package.',';
-		  }
-		  $package_three = rtrim($package3,",");
+	// 	  $package3 = "";
+	// 	  foreach($request->input('package_includes_three') as $package)
+	// 	  {
+	// 	     $package3 .= $package.',';
+	// 	  }
+	// 	  $package_three = rtrim($package3,",");
 		  
-	   }
-	   else
-	   {
-	     $package_three = "";
-	   }
+	//    }
+	//    else
+	//    {
+	//      $package_three = "";
+	//    }
 	   
 	   
 	   
-	   if(!empty($request->input('package_includes_four')))
-	   {
+	//    if(!empty($request->input('package_includes_four')))
+	//    {
 	      
-		  $package4 = "";
-		  foreach($request->input('package_includes_four') as $package)
-		  {
-		     $package4 .= $package.',';
-		  }
-		  $package_four = rtrim($package4,",");
+	// 	  $package4 = "";
+	// 	  foreach($request->input('package_includes_four') as $package)
+	// 	  {
+	// 	     $package4 .= $package.',';
+	// 	  }
+	// 	  $package_four = rtrim($package4,",");
 		  
-	   }
-	   else
-	   {
-	     $package_four = "";
-	   }
+	//    }
+	//    else
+	//    {
+	//      $package_four = "";
+	//    }
 	   
-	   $watermark = $allsettings->site_watermark;
-	   $image_size = $allsettings->site_max_image_size;
-	   $file_size = $allsettings->site_max_file_size;
-	   $url = URL::to("/");
+	//    $watermark = $allsettings->site_watermark;
+	//    $image_size = $allsettings->site_max_image_size;
+	//    $file_size = $allsettings->site_max_file_size;
+	//    $url = URL::to("/");
 	   
-	   $request->validate([
-							'item_name' => 'required',
-							'item_desc' => 'required',
-							'item_thumbnail' => 'required|mimes:jpeg,jpg,png|max:'.$image_size.'|dimensions:width=80,height=80',
-							'item_preview' => 'required|mimes:jpeg,jpg,png|max:'.$image_size,
-							'item_file' => 'mimes:zip|required|max:'.$file_size,
-							'item_screenshot.*' => 'image|mimes:jpeg,jpg,png|max:'.$image_size,
+	//    $request->validate([
+	// 						'item_name' => 'required',
+	// 						'item_desc' => 'required',
+	// 						'item_thumbnail' => 'required|mimes:jpeg,jpg,png|max:'.$image_size.'|dimensions:width=80,height=80',
+	// 						'item_preview' => 'required|mimes:jpeg,jpg,png|max:'.$image_size,
+	// 						'item_file' => 'mimes:zip|required|max:'.$file_size,
+	// 						'item_screenshot.*' => 'image|mimes:jpeg,jpg,png|max:'.$image_size,
 							
-         ]);
-		 $rules = array(
+    //      ]);
+	// 	 $rules = array(
 				
-				'item_name' => ['required', 'max:100', Rule::unique('items') -> where(function($sql){ $sql->where('drop_status','=','no');})],
+	// 			'item_name' => ['required', 'max:100', Rule::unique('items') -> where(function($sql){ $sql->where('drop_status','=','no');})],
 				
 				
-	     );
+	//      );
 		 
-		 $messsages = array(
+	// 	 $messsages = array(
 		      
-	    );
+	//     );
 		 
-		$validator = Validator::make(Input::all(), $rules,$messsages);
+	// 	$validator = Validator::make(Input::all(), $rules,$messsages);
 		
-		if ($validator->fails()) 
-		{
-		 $failedRules = $validator->failed();
-		 return back()->withErrors($validator);
-		} 
-		else
-		{
+	// 	if ($validator->fails()) 
+	// 	{
+	// 	 $failedRules = $validator->failed();
+	// 	 return back()->withErrors($validator);
+	// 	} 
+	// 	else
+	// 	{
 		    
-		  if ($request->hasFile('item_thumbnail')) 
-		  {
+	// 	  if ($request->hasFile('item_thumbnail')) 
+	// 	  {
 		  
-		    if($allsettings->watermark_option == 1)
-			{
-			$image = $request->file('item_thumbnail');
-			$img_name = time() . '.'.$image->getClientOriginalExtension();
-			$destinationPath = public_path('/storage/items');
-			$imagePath = $destinationPath. "/".  $img_name;
-			$image->move($destinationPath, $img_name);
-			/* new code */		
-			$watermarkImg=Image::make($url.'/public/storage/settings/'.$watermark);
-            $img=Image::make($url.'/public/storage/items/'.$img_name);
-            $wmarkWidth=$watermarkImg->width();
-            $wmarkHeight=$watermarkImg->height();
+	// 	    if($allsettings->watermark_option == 1)
+	// 		{
+	// 		$image = $request->file('item_thumbnail');
+	// 		$img_name = time() . '.'.$image->getClientOriginalExtension();
+	// 		$destinationPath = public_path('/storage/items');
+	// 		$imagePath = $destinationPath. "/".  $img_name;
+	// 		$image->move($destinationPath, $img_name);
+	// 		/* new code */		
+	// 		$watermarkImg=Image::make($url.'/public/storage/settings/'.$watermark);
+    //         $img=Image::make($url.'/public/storage/items/'.$img_name);
+    //         $wmarkWidth=$watermarkImg->width();
+    //         $wmarkHeight=$watermarkImg->height();
 
-			$imgWidth=$img->width();
-			$imgHeight=$img->height();
+	// 		$imgWidth=$img->width();
+	// 		$imgHeight=$img->height();
 
-			$x=0;
-			$y=0;
-			while($y<=$imgHeight){
-				$img->insert($url.'/public/storage/settings/'.$watermark,'top-left',$x,$y);
-				$x+=$wmarkWidth;
-				if($x>=$imgWidth){
-					$x=0;
-					$y+=$wmarkHeight;
-				}
-			}
-            $img->save(base_path('public/storage/items/'.$img_name));
-			$item_thumbnail = $img_name;
-			/* new code */
-			}
-			else
-			{
-			    $image = $request->file('item_thumbnail');
-				$img_name = time() . '.'.$image->getClientOriginalExtension();
-				$destinationPath = public_path('/storage/items');
-				$imagePath = $destinationPath. "/".  $img_name;
-				$image->move($destinationPath, $img_name);
-				$item_thumbnail = $img_name;
-			}
+	// 		$x=0;
+	// 		$y=0;
+	// 		while($y<=$imgHeight){
+	// 			$img->insert($url.'/public/storage/settings/'.$watermark,'top-left',$x,$y);
+	// 			$x+=$wmarkWidth;
+	// 			if($x>=$imgWidth){
+	// 				$x=0;
+	// 				$y+=$wmarkHeight;
+	// 			}
+	// 		}
+    //         $img->save(base_path('public/storage/items/'.$img_name));
+	// 		$item_thumbnail = $img_name;
+	// 		/* new code */
+	// 		}
+	// 		else
+	// 		{
+	// 		    $image = $request->file('item_thumbnail');
+	// 			$img_name = time() . '.'.$image->getClientOriginalExtension();
+	// 			$destinationPath = public_path('/storage/items');
+	// 			$imagePath = $destinationPath. "/".  $img_name;
+	// 			$image->move($destinationPath, $img_name);
+	// 			$item_thumbnail = $img_name;
+	// 		}
 			
 			
-		  }
-		  else
-		  {
-		     $item_thumbnail = "";
-		  }
+	// 	  }
+	// 	  else
+	// 	  {
+	// 	     $item_thumbnail = "";
+	// 	  }
 		  
 		  
-		  if ($request->hasFile('item_preview')) 
-		  {
-		    if($allsettings->watermark_option == 1)
-			{
-			$image = $request->file('item_preview');
-			$img_name = time() . '252.'.$image->getClientOriginalExtension();
-			$destinationPath = public_path('/storage/items');
-			$imagePath = $destinationPath. "/".  $img_name;
-			$image->move($destinationPath, $img_name);
-			/* new code */		
-			$watermarkImg=Image::make($url.'/public/storage/settings/'.$watermark);
-            $img=Image::make($url.'/public/storage/items/'.$img_name);
-            $wmarkWidth=$watermarkImg->width();
-            $wmarkHeight=$watermarkImg->height();
+	// 	  if ($request->hasFile('item_preview')) 
+	// 	  {
+	// 	    if($allsettings->watermark_option == 1)
+	// 		{
+	// 		$image = $request->file('item_preview');
+	// 		$img_name = time() . '252.'.$image->getClientOriginalExtension();
+	// 		$destinationPath = public_path('/storage/items');
+	// 		$imagePath = $destinationPath. "/".  $img_name;
+	// 		$image->move($destinationPath, $img_name);
+	// 		/* new code */		
+	// 		$watermarkImg=Image::make($url.'/public/storage/settings/'.$watermark);
+    //         $img=Image::make($url.'/public/storage/items/'.$img_name);
+    //         $wmarkWidth=$watermarkImg->width();
+    //         $wmarkHeight=$watermarkImg->height();
 
-			$imgWidth=$img->width();
-			$imgHeight=$img->height();
+	// 		$imgWidth=$img->width();
+	// 		$imgHeight=$img->height();
 
-			$x=0;
-			$y=0;
-			while($y<=$imgHeight){
-				$img->insert($url.'/public/storage/settings/'.$watermark,'top-left',$x,$y);
-				$x+=$wmarkWidth;
-				if($x>=$imgWidth){
-					$x=0;
-					$y+=$wmarkHeight;
-				}
-			}
-            $img->save(base_path('public/storage/items/'.$img_name));
-			$item_preview = $img_name;
-			/* new code */
-			}
-			else
-			{
-			   $image = $request->file('item_preview');
-			   $img_name = time() . '252.'.$image->getClientOriginalExtension();
-			   $destinationPath = public_path('/storage/items');
-			   $imagePath = $destinationPath. "/".  $img_name;
-			   $image->move($destinationPath, $img_name);
-			   $item_preview = $img_name;
-			}
+	// 		$x=0;
+	// 		$y=0;
+	// 		while($y<=$imgHeight){
+	// 			$img->insert($url.'/public/storage/settings/'.$watermark,'top-left',$x,$y);
+	// 			$x+=$wmarkWidth;
+	// 			if($x>=$imgWidth){
+	// 				$x=0;
+	// 				$y+=$wmarkHeight;
+	// 			}
+	// 		}
+    //         $img->save(base_path('public/storage/items/'.$img_name));
+	// 		$item_preview = $img_name;
+	// 		/* new code */
+	// 		}
+	// 		else
+	// 		{
+	// 		   $image = $request->file('item_preview');
+	// 		   $img_name = time() . '252.'.$image->getClientOriginalExtension();
+	// 		   $destinationPath = public_path('/storage/items');
+	// 		   $imagePath = $destinationPath. "/".  $img_name;
+	// 		   $image->move($destinationPath, $img_name);
+	// 		   $item_preview = $img_name;
+	// 		}
 			
 			
-		  }
-		  else
-		  {
-		     $item_preview = "";
-		  }
+	// 	  }
+	// 	  else
+	// 	  {
+	// 	     $item_preview = "";
+	// 	  }
 		  
 		  
 		  	  
 		  
-		  if ($request->hasFile('item_file')) 
-		  {
-			  $image = $request->file('item_file');
-			  $img_name = time() . '147.'.$image->getClientOriginalExtension();
-			  if($allsettings->site_s3_storage == 1)
-			  {
-				 Storage::disk('s3')->put($img_name, file_get_contents($image), 'public');
-				 $item_file = $img_name;
-			  }
-			  else
-			  {
+	// 	  if ($request->hasFile('item_file')) 
+	// 	  {
+	// 		  $image = $request->file('item_file');
+	// 		  $img_name = time() . '147.'.$image->getClientOriginalExtension();
+	// 		  if($allsettings->site_s3_storage == 1)
+	// 		  {
+	// 			 Storage::disk('s3')->put($img_name, file_get_contents($image), 'public');
+	// 			 $item_file = $img_name;
+	// 		  }
+	// 		  else
+	// 		  {
 			
-				$destinationPath = public_path('/storage/items');
-				$imagePath = $destinationPath. "/".  $img_name;
-				$image->move($destinationPath, $img_name);
-				$item_file = $img_name;
-			  }	
+	// 			$destinationPath = public_path('/storage/items');
+	// 			$imagePath = $destinationPath. "/".  $img_name;
+	// 			$image->move($destinationPath, $img_name);
+	// 			$item_file = $img_name;
+	// 		  }	
 			
-		  }
-		  else
-		  {
-		     $item_file = "";
-		  }
+	// 	  }
+	// 	  else
+	// 	  {
+	// 	     $item_file = "";
+	// 	  }
 		  
 		
-		    $data = array('user_id' => $user_id, 'item_token' => $item_token, 'item_name' => $item_name, 'item_desc' => $item_desc, 'item_thumbnail' => $item_thumbnail, 'item_preview' => $item_preview, 'item_file' => $item_file, 'item_category' =>$cat_id, 'item_category_type' => $cat_name, 'item_type' => $item_type, 'regular_price' => $regular_price, 'extended_price' => $extended_price, 'compatible_browsers' => $browser_one, 'package_includes' => $package_one, 'package_includes_two' =>  $package_two, 'columns' => $columns, 'layout' => $layout, 'package_includes_three' => $package_three, 'layered' => $layered, 'cs_version' => $cs_version, 'print_dimensions' => $print_dimensions, 'pixel_dimensions' => $pixel_dimensions, 'package_includes_four' => $package_four, 'demo_url' => $demo_url, 'item_tags' => $item_tags, 'item_status' => $item_status, 'item_shortdesc' => $item_shortdesc, 'free_download' => $free_download, 'item_slug' => $item_slug, 'video_url' => $video_url, 'future_update' => $future_update, 'item_support' => $item_support, 'created_item' => $created_item, 'updated_item' => $updated_item, 'item_flash_request' => $item_flash_request);
+	// 	    $data = array('user_id' => $user_id, 'item_token' => $item_token, 'item_name' => $item_name, 'item_desc' => $item_desc, 'item_thumbnail' => $item_thumbnail, 'item_preview' => $item_preview, 'item_file' => $item_file, 'item_category' =>$cat_id, 'item_category_type' => $cat_name, 'item_type' => $item_type, 'regular_price' => $regular_price, 'extended_price' => $extended_price, 'compatible_browsers' => $browser_one, 'package_includes' => $package_one, 'package_includes_two' =>  $package_two, 'columns' => $columns, 'layout' => $layout, 'package_includes_three' => $package_three, 'layered' => $layered, 'cs_version' => $cs_version, 'print_dimensions' => $print_dimensions, 'pixel_dimensions' => $pixel_dimensions, 'package_includes_four' => $package_four, 'demo_url' => $demo_url, 'item_tags' => $item_tags, 'item_status' => $item_status, 'item_shortdesc' => $item_shortdesc, 'free_download' => $free_download, 'item_slug' => $item_slug, 'video_url' => $video_url, 'future_update' => $future_update, 'item_support' => $item_support, 'created_item' => $created_item, 'updated_item' => $updated_item, 'item_flash_request' => $item_flash_request);
 			
-		    Items::saveitemData($data);
+	// 	    Items::saveitemData($data);
 			
 			
 			
-			if ($request->hasFile('item_screenshot')) 
-			{
-			   if($allsettings->watermark_option == 1)
-			   {
+	// 		if ($request->hasFile('item_screenshot')) 
+	// 		{
+	// 		   if($allsettings->watermark_option == 1)
+	// 		   {
 			   
-					$files = $request->file('item_screenshot');
-					foreach($files as $file)
-					{
-						$extension = $file->getClientOriginalExtension();
-						$fileName = str_random(5)."-".date('his')."-".str_random(3).".".$extension;
-						$folderpath  = public_path('/storage/items');
-						$file->move($folderpath , $fileName);
-						/* new code */		
-						$watermarkImg=Image::make($url.'/public/storage/settings/'.$watermark);
-						$img=Image::make($url.'/public/storage/items/'.$fileName);
-						$wmarkWidth=$watermarkImg->width();
-						$wmarkHeight=$watermarkImg->height();
+	// 				$files = $request->file('item_screenshot');
+	// 				foreach($files as $file)
+	// 				{
+	// 					$extension = $file->getClientOriginalExtension();
+	// 					$fileName = str_random(5)."-".date('his')."-".str_random(3).".".$extension;
+	// 					$folderpath  = public_path('/storage/items');
+	// 					$file->move($folderpath , $fileName);
+	// 					/* new code */		
+	// 					$watermarkImg=Image::make($url.'/public/storage/settings/'.$watermark);
+	// 					$img=Image::make($url.'/public/storage/items/'.$fileName);
+	// 					$wmarkWidth=$watermarkImg->width();
+	// 					$wmarkHeight=$watermarkImg->height();
 			
-						$imgWidth=$img->width();
-						$imgHeight=$img->height();
+	// 					$imgWidth=$img->width();
+	// 					$imgHeight=$img->height();
 			
-						$x=0;
-						$y=0;
-						while($y<=$imgHeight){
-							$img->insert($url.'/public/storage/settings/'.$watermark,'top-left',$x,$y);
-							$x+=$wmarkWidth;
-							if($x>=$imgWidth){
-								$x=0;
-								$y+=$wmarkHeight;
-							}
-						}
-						$img->save(base_path('public/storage/items/'.$fileName));
-						/* new code */
-						$imgdata = array('item_token' => $item_token, 'item_image' => $fileName);
-						Items::saveitemImages($imgdata);
-					}
+	// 					$x=0;
+	// 					$y=0;
+	// 					while($y<=$imgHeight){
+	// 						$img->insert($url.'/public/storage/settings/'.$watermark,'top-left',$x,$y);
+	// 						$x+=$wmarkWidth;
+	// 						if($x>=$imgWidth){
+	// 							$x=0;
+	// 							$y+=$wmarkHeight;
+	// 						}
+	// 					}
+	// 					$img->save(base_path('public/storage/items/'.$fileName));
+	// 					/* new code */
+	// 					$imgdata = array('item_token' => $item_token, 'item_image' => $fileName);
+	// 					Items::saveitemImages($imgdata);
+	// 				}
 				
-			   }
-				else
-				{
-				   $files = $request->file('item_screenshot');
-					foreach($files as $file)
-					{
-						$extension = $file->getClientOriginalExtension();
-						$fileName = str_random(5)."-".date('his')."-".str_random(3).".".$extension;
-						$folderpath  = public_path('/storage/items');
-						$file->move($folderpath , $fileName);
-						$imgdata = array('item_token' => $item_token, 'item_image' => $fileName);
-						Items::saveitemImages($imgdata);
-					}
-				}	
+	// 		   }
+	// 			else
+	// 			{
+	// 			   $files = $request->file('item_screenshot');
+	// 				foreach($files as $file)
+	// 				{
+	// 					$extension = $file->getClientOriginalExtension();
+	// 					$fileName = str_random(5)."-".date('his')."-".str_random(3).".".$extension;
+	// 					$folderpath  = public_path('/storage/items');
+	// 					$file->move($folderpath , $fileName);
+	// 					$imgdata = array('item_token' => $item_token, 'item_image' => $fileName);
+	// 					Items::saveitemImages($imgdata);
+	// 				}
+	// 			}	
 				
 					
-		 }
+	// 	 }
        
        
               
 			
 			
-			return redirect()->back()->with('success', $item_approve_status);
+	// 		return redirect()->back()->with('success', $item_approve_status);
 		
 		
-		}
+	// 	}
 	   
 	   
 	   
@@ -1233,7 +1273,7 @@ class ItemController extends Controller
 	   
 	   
 	
-	}
+	// }
 	
 	
 	

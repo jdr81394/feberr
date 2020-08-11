@@ -16,7 +16,7 @@ class UnwrappedUvsTable extends Migration
         //
         Schema::create("unwrapped_uvs", function(Blueprint $table){
             $table->id();
-            $table->enum("unwarpped_uvs", ['Ex 1', 'Ex 2']);
+            $table->enum("unwrapped_uvs", ['Ex 1', 'Ex 2']);
             $table->timestamps();
         });
     }

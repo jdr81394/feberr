@@ -5,10 +5,12 @@ namespace Feberr\Http\Controllers\Auth;
 use Feberr\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Auth;
-use Socialite;
+// use Auth;
+// use Socialite;
 use Feberr\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -114,7 +116,7 @@ class LoginController extends Controller
 		$field = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 		$email = trim($request->email);
 	    $password = trim($request->password);
-	
+		
 		if (Auth::attempt(array($field => $email, 'password' =>  $password, 'verified' => 1, 'drop_status' => 'no' )))
 		{
 			if(auth()->user()->user_type == 'admin')

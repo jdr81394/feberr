@@ -16,6 +16,8 @@ class RobertItemsTable extends Migration
         Schema::create("robert_items", function (Blueprint $table) {
             $table->id();
             // Blueprint class doesnt have the id method.. must manually add this through db GUI in future. Jake
+            $table->string("name");
+            $table->string("description");
             $table->float("price", 8, 2);
             $table->integer("media_type");
             $table->integer("geometry");
