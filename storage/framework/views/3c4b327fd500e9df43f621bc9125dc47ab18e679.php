@@ -32,6 +32,7 @@ Version: 9.0
 <link rel="stylesheet" href="<?php echo e(asset('public/video/video.popup.css')); ?>">
 <link type="text/css" href="<?php echo e(URL::to('public/countdown/jquery.countdown.css?v=1.0.0.0')); ?>" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo e(URL::to('resources/views/admin/template/datepicker/picker.css')); ?>"> 
+<link rel="stylesheet" href="<?php echo e(asset('public/assets/css/upload-items.css')); ?>" >
 <?php if($translate == 'ar'): ?>
 <link rel="stylesheet" href="<?php echo e(asset('public/assets/css/rtl.css')); ?>" />
 <?php endif; ?>

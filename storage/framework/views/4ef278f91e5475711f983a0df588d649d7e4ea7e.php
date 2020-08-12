@@ -193,88 +193,7 @@
                                     </p>
                                     <p class="ammount"><?php echo e(Auth::user()->earnings); ?> <?php echo e($allsettings->site_currency); ?></p>
                                 </div>
-                                <div class="dropdowns dropdown--author">
-                                    <ul>
-                                      <?php if(Auth::user()->user_type == 'admin'): ?>
-                                      <li>
-                                            <a href="<?php echo e(URL::to('/admin')); ?>" target="_blank">
-                                                <span class="lnr lnr-cog"></span><?php echo e(Helper::translation(3022,$translate)); ?></a>
-                                      </li>
-                                      <li>
-                                            <a href="<?php echo e(url('/logout')); ?>">
-                                                <span class="lnr lnr-exit"></span><?php echo e(Helper::translation(3023,$translate)); ?></a>
-                                      </li>
-                                      <?php endif; ?>
-                                      <?php if(Auth::user()->user_type == 'vendor'): ?>
-                                      <li>
-                                            <a href="<?php echo e(URL::to('/user')); ?>/<?php echo e(Auth::user()->username); ?>">
-                                                <span class="lnr lnr-user"></span><?php echo e(Helper::translation(2926,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/profile-settings')); ?>">
-                                                <span class="lnr lnr-cog"></span><?php echo e(Helper::translation(2927,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/purchases')); ?>">
-                                                <span class="lnr lnr-cart"></span><?php echo e(Helper::translation(3024,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/favourites')); ?>">
-                                                <span class="lnr lnr-heart"></span><?php echo e(Helper::translation(2929,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/coupon')); ?>">
-                                                <span class="lnr lnr-location"></span><?php echo e(Helper::translation(2919,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/sales')); ?>">
-                                                <span class="lnr lnr-chart-bars"></span><?php echo e(Helper::translation(2930,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/upload-item')); ?>">
-                                                <span class="lnr lnr-upload"></span><?php echo e(Helper::translation(2931,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/manage-item')); ?>">
-                                                <span class="lnr lnr-book"></span><?php echo e(Helper::translation(2932,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(URL::to('/withdrawal')); ?>">
-                                                <span class="lnr lnr-briefcase"></span><?php echo e(Helper::translation(2933,$translate)); ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(url('/logout')); ?>">
-                                                <span class="lnr lnr-exit"></span><?php echo e(Helper::translation(3023,$translate)); ?></a>
-                                        </li>
-                                      <?php endif; ?>
-                                      <?php if(Auth::user()->user_type == 'customer'): ?> 
-                                      <li>
-                                            <a href="<?php echo e(URL::to('/user')); ?>/<?php echo e(Auth::user()->username); ?>">
-                                                <span class="lnr lnr-user"></span><?php echo e(Helper::translation(2926,$translate)); ?></a>
-                                      </li>
-                                      <li>
-                                            <a href="<?php echo e(URL::to('/profile-settings')); ?>">
-                                                <span class="lnr lnr-cog"></span><?php echo e(Helper::translation(2927,$translate)); ?></a>
-                                      </li>
-                                      <li>
-                                            <a href="<?php echo e(URL::to('/purchases')); ?>">
-                                                <span class="lnr lnr-cart"></span><?php echo e(Helper::translation(3024,$translate)); ?></a>
-                                      </li>
-                                      <li>
-                                            <a href="<?php echo e(URL::to('/favourites')); ?>">
-                                                <span class="lnr lnr-heart"></span><?php echo e(Helper::translation(2929,$translate)); ?></a>
-                                      </li>
-                                      <li>
-                                            <a href="<?php echo e(URL::to('/withdrawal')); ?>">
-                                                <span class="lnr lnr-briefcase"></span><?php echo e(Helper::translation(2933,$translate)); ?></a>
-                                      </li>
-                                      <li>
-                                            <a href="<?php echo e(url('/logout')); ?>">
-                                                <span class="lnr lnr-exit"></span><?php echo e(Helper::translation(3023,$translate)); ?></a>
-                                      </li> 
-                                      <?php endif; ?>
-                                    </ul>
-                                </div>
+                                
                             </div>
                          </div>
                         <div class="mobile_content ">
@@ -440,57 +359,84 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
-                                    
-                                    <li class="has_dropdown">
-                                        <a href="<?php echo e(url('/shop')); ?>"><?php echo e(Helper::translation(3025,$translate)); ?></a>
-                                        <div class="dropdowns dropdown--menu">
-                                            <ul>
-                                                <li>
-                                                    <a href="<?php echo e(url('/shop')); ?>/recent-items"><?php echo e(Helper::translation(3026,$translate)); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo e(url('/shop')); ?>/featured-items"><?php echo e(Helper::translation(3027,$translate)); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo e(url('/free-items')); ?>"><?php echo e(Helper::translation(3016,$translate)); ?></a>
-                                                </li>
-                                                
-                                                <li>
-                                                    <a href="<?php echo e(url('/top-authors')); ?>"><?php echo e(Helper::translation(3028,$translate)); ?></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <?php $__currentLoopData = $categories['menu']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <li class="has_dropdown">
-                                        <a href="<?php echo e(URL::to('/shop/category/')); ?>/<?php echo e($menu->cat_id); ?>/<?php echo e($menu->category_slug); ?>"><?php echo e($menu->category_name); ?></a>
-                                        <div class="dropdowns dropdown--menu">
-                                            <ul>
-                                            <?php $__currentLoopData = $menu->subcategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li>
-                                                    <a href="<?php echo e(URL::to('/shop/subcategory/')); ?>/<?php echo e($sub_category->subcat_id); ?>/<?php echo e($sub_category->subcategory_slug); ?>"><?php echo e($sub_category->subcategory_name); ?></a>
-                                                </li>
-                                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
-                                            </ul>
-                                        </div>
-                                    </li>
-                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
-                                   <li class="has_dropdown">
-                                        <a href="javascript:void(0);"><?php echo e(Helper::translation(3029,$translate)); ?></a>
-                                        <div class="dropdowns dropdown--menu">
-                                            <ul>
-                                               <?php $__currentLoopData = $allpages['pages']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pages): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li>
-                                                    <a href="<?php echo e(URL::to('/page/')); ?>/<?php echo e($pages->page_id); ?>/<?php echo e($pages->page_slug); ?>"><?php echo e($pages->page_title); ?></a>
-                                                </li>
-                                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo e(URL::to('/flash-sale')); ?>" class="red-color"><?php echo e(Helper::translation(2993,$translate)); ?></a>
-                                    </li>
+                                <?php if(Auth::user()->user_type == 'admin'): ?>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/admin')); ?>" target="_blank">
+                                                <span class="lnr lnr-cog"></span><?php echo e(Helper::translation(3022,$translate)); ?></a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(url('/logout')); ?>">
+                                                <span class="lnr lnr-exit"></span><?php echo e(Helper::translation(3023,$translate)); ?></a>
+                                      </li>
+                                      <?php endif; ?>
+                                      <?php if(Auth::user()->user_type == 'vendor'): ?>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/user')); ?>/<?php echo e(Auth::user()->username); ?>">
+                                                <span class="lnr lnr-user"></span><?php echo e(Helper::translation(2926,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/profile-settings')); ?>">
+                                                <span class="lnr lnr-cog"></span><?php echo e(Helper::translation(2927,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/purchases')); ?>">
+                                                <span class="lnr lnr-cart"></span><?php echo e(Helper::translation(3024,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/favourites')); ?>">
+                                                <span class="lnr lnr-heart"></span><?php echo e(Helper::translation(2929,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/coupon')); ?>">
+                                                <span class="lnr lnr-location"></span><?php echo e(Helper::translation(2919,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/sales')); ?>">
+                                                <span class="lnr lnr-chart-bars"></span><?php echo e(Helper::translation(2930,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/upload-item')); ?>">
+                                                <span class="lnr lnr-upload"></span><?php echo e(Helper::translation(2931,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/manage-item')); ?>">
+                                                <span class="lnr lnr-book"></span><?php echo e(Helper::translation(2932,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/withdrawal')); ?>">
+                                                <span class="lnr lnr-briefcase"></span><?php echo e(Helper::translation(2933,$translate)); ?></a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="<?php echo e(url('/logout')); ?>">
+                                                <span class="lnr lnr-exit"></span><?php echo e(Helper::translation(3023,$translate)); ?></a>
+                                        </li>
+                                      <?php endif; ?>
+                                      <?php if(Auth::user()->user_type == 'customer'): ?> 
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/user')); ?>/<?php echo e(Auth::user()->username); ?>">
+                                                <span class="lnr lnr-user"></span><?php echo e(Helper::translation(2926,$translate)); ?></a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/profile-settings')); ?>">
+                                                <span class="lnr lnr-cog"></span><?php echo e(Helper::translation(2927,$translate)); ?></a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/purchases')); ?>">
+                                                <span class="lnr lnr-cart"></span><?php echo e(Helper::translation(3024,$translate)); ?></a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/favourites')); ?>">
+                                                <span class="lnr lnr-heart"></span><?php echo e(Helper::translation(2929,$translate)); ?></a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(URL::to('/withdrawal')); ?>">
+                                                <span class="lnr lnr-briefcase"></span><?php echo e(Helper::translation(2933,$translate)); ?></a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="<?php echo e(url('/logout')); ?>">
+                                                <span class="lnr lnr-exit"></span><?php echo e(Helper::translation(3023,$translate)); ?></a>
+                                      </li> 
+                                      <?php endif; ?>
                                 </ul>
                             </div>
                             <!-- /.navbar-collapse -->

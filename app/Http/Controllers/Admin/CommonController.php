@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Feberr\Models\Settings;
 use Feberr\Models\Pages;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Mail;
 
 

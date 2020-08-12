@@ -190,88 +190,7 @@
                                     </p>
                                     <p class="ammount">{{ Auth::user()->earnings }} {{ $allsettings->site_currency }}</p>
                                 </div>
-                                <div class="dropdowns dropdown--author">
-                                    <ul>
-                                      @if(Auth::user()->user_type == 'admin')
-                                      <li>
-                                            <a href="{{ URL::to('/admin') }}" target="_blank">
-                                                <span class="lnr lnr-cog"></span>{{ Helper::translation(3022,$translate) }}</a>
-                                      </li>
-                                      <li>
-                                            <a href="{{ url('/logout') }}">
-                                                <span class="lnr lnr-exit"></span>{{ Helper::translation(3023,$translate) }}</a>
-                                      </li>
-                                      @endif
-                                      @if(Auth::user()->user_type == 'vendor')
-                                      <li>
-                                            <a href="{{ URL::to('/user') }}/{{ Auth::user()->username }}">
-                                                <span class="lnr lnr-user"></span>{{ Helper::translation(2926,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/profile-settings') }}">
-                                                <span class="lnr lnr-cog"></span>{{ Helper::translation(2927,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/purchases') }}">
-                                                <span class="lnr lnr-cart"></span>{{ Helper::translation(3024,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/favourites') }}">
-                                                <span class="lnr lnr-heart"></span>{{ Helper::translation(2929,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/coupon') }}">
-                                                <span class="lnr lnr-location"></span>{{ Helper::translation(2919,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/sales') }}">
-                                                <span class="lnr lnr-chart-bars"></span>{{ Helper::translation(2930,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/upload-item') }}">
-                                                <span class="lnr lnr-upload"></span>{{ Helper::translation(2931,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/manage-item') }}">
-                                                <span class="lnr lnr-book"></span>{{ Helper::translation(2932,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ URL::to('/withdrawal') }}">
-                                                <span class="lnr lnr-briefcase"></span>{{ Helper::translation(2933,$translate) }}</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('/logout') }}">
-                                                <span class="lnr lnr-exit"></span>{{ Helper::translation(3023,$translate) }}</a>
-                                        </li>
-                                      @endif
-                                      @if(Auth::user()->user_type == 'customer') 
-                                      <li>
-                                            <a href="{{ URL::to('/user') }}/{{ Auth::user()->username }}">
-                                                <span class="lnr lnr-user"></span>{{ Helper::translation(2926,$translate) }}</a>
-                                      </li>
-                                      <li>
-                                            <a href="{{ URL::to('/profile-settings') }}">
-                                                <span class="lnr lnr-cog"></span>{{ Helper::translation(2927,$translate) }}</a>
-                                      </li>
-                                      <li>
-                                            <a href="{{ URL::to('/purchases') }}">
-                                                <span class="lnr lnr-cart"></span>{{ Helper::translation(3024,$translate) }}</a>
-                                      </li>
-                                      <li>
-                                            <a href="{{ URL::to('/favourites') }}">
-                                                <span class="lnr lnr-heart"></span>{{ Helper::translation(2929,$translate) }}</a>
-                                      </li>
-                                      <li>
-                                            <a href="{{ URL::to('/withdrawal') }}">
-                                                <span class="lnr lnr-briefcase"></span>{{ Helper::translation(2933,$translate) }}</a>
-                                      </li>
-                                      <li>
-                                            <a href="{{ url('/logout') }}">
-                                                <span class="lnr lnr-exit"></span>{{ Helper::translation(3023,$translate) }}</a>
-                                      </li> 
-                                      @endif
-                                    </ul>
-                                </div>
+                                
                             </div>
                          </div>
                         <div class="mobile_content ">
@@ -436,57 +355,85 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
-                                    
-                                    <li class="has_dropdown">
-                                        <a href="{{ url('/shop') }}">{{ Helper::translation(3025,$translate) }}</a>
-                                        <div class="dropdowns dropdown--menu">
-                                            <ul>
-                                                <li>
-                                                    <a href="{{ url('/shop') }}/recent-items">{{ Helper::translation(3026,$translate) }}</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ url('/shop') }}/featured-items">{{ Helper::translation(3027,$translate) }}</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ url('/free-items') }}">{{ Helper::translation(3016,$translate) }}</a>
-                                                </li>
-                                                
-                                                <li>
-                                                    <a href="{{ url('/top-authors') }}">{{ Helper::translation(3028,$translate) }}</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    @foreach($categories['menu'] as $menu)
-                                    <li class="has_dropdown">
-                                        <a href="{{ URL::to('/shop/category/') }}/{{$menu->cat_id}}/{{$menu->category_slug}}">{{ $menu->category_name }}</a>
-                                        <div class="dropdowns dropdown--menu">
-                                            <ul>
-                                            @foreach($menu->subcategory as $sub_category)
-                                                <li>
-                                                    <a href="{{ URL::to('/shop/subcategory/') }}/{{$sub_category->subcat_id}}/{{$sub_category->subcategory_slug}}">{{ $sub_category->subcategory_name }}</a>
-                                                </li>
-                                              @endforeach  
-                                            </ul>
-                                        </div>
-                                    </li>
-                                   @endforeach 
-                                   <li class="has_dropdown">
-                                        <a href="javascript:void(0);">{{ Helper::translation(3029,$translate) }}</a>
-                                        <div class="dropdowns dropdown--menu">
-                                            <ul>
-                                               @foreach($allpages['pages'] as $pages)
-                                                <li>
-                                                    <a href="{{ URL::to('/page/') }}/{{ $pages->page_id }}/{{ $pages->page_slug }}">{{ $pages->page_title }}</a>
-                                                </li>
-                                              @endforeach
-                                                
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ URL::to('/flash-sale') }}" class="red-color">{{ Helper::translation(2993,$translate) }}</a>
-                                    </li>
+                                    <!-- Jake for some reason when I move this auth over to here it cannot find the class. -->
+                                @if(Auth::user()->user_type == 'admin')
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/admin') }}" target="_blank">
+                                                <span class="lnr lnr-cog"></span>{{ Helper::translation(3022,$translate) }}</a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ url('/logout') }}">
+                                                <span class="lnr lnr-exit"></span>{{ Helper::translation(3023,$translate) }}</a>
+                                      </li>
+                                      @endif
+                                      @if(Auth::user()->user_type == 'vendor')
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/user') }}/{{ Auth::user()->username }}">
+                                                <span class="lnr lnr-user"></span>{{ Helper::translation(2926,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/profile-settings') }}">
+                                                <span class="lnr lnr-cog"></span>{{ Helper::translation(2927,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/purchases') }}">
+                                                <span class="lnr lnr-cart"></span>{{ Helper::translation(3024,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/favourites') }}">
+                                                <span class="lnr lnr-heart"></span>{{ Helper::translation(2929,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/coupon') }}">
+                                                <span class="lnr lnr-location"></span>{{ Helper::translation(2919,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/sales') }}">
+                                                <span class="lnr lnr-chart-bars"></span>{{ Helper::translation(2930,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/upload-item') }}">
+                                                <span class="lnr lnr-upload"></span>{{ Helper::translation(2931,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/manage-item') }}">
+                                                <span class="lnr lnr-book"></span>{{ Helper::translation(2932,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/withdrawal') }}">
+                                                <span class="lnr lnr-briefcase"></span>{{ Helper::translation(2933,$translate) }}</a>
+                                        </li>
+                                        <li>
+                                            <a style="font-size: 11px" href="{{ url('/logout') }}">
+                                                <span class="lnr lnr-exit"></span>{{ Helper::translation(3023,$translate) }}</a>
+                                        </li>
+                                      @endif
+                                      @if(Auth::user()->user_type == 'customer') 
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/user') }}/{{ Auth::user()->username }}">
+                                                <span class="lnr lnr-user"></span>{{ Helper::translation(2926,$translate) }}</a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/profile-settings') }}">
+                                                <span class="lnr lnr-cog"></span>{{ Helper::translation(2927,$translate) }}</a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/purchases') }}">
+                                                <span class="lnr lnr-cart"></span>{{ Helper::translation(3024,$translate) }}</a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/favourites') }}">
+                                                <span class="lnr lnr-heart"></span>{{ Helper::translation(2929,$translate) }}</a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ URL::to('/withdrawal') }}">
+                                                <span class="lnr lnr-briefcase"></span>{{ Helper::translation(2933,$translate) }}</a>
+                                      </li>
+                                      <li>
+                                            <a style="font-size: 11px" href="{{ url('/logout') }}">
+                                                <span class="lnr lnr-exit"></span>{{ Helper::translation(3023,$translate) }}</a>
+                                      </li> 
+                                      @endif
                                 </ul>
                             </div>
                             <!-- /.navbar-collapse -->

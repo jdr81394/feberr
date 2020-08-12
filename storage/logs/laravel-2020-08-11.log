@@ -1,0 +1,115 @@
+[2020-08-11 19:49:57] local.ERROR: Undefined property: stdClass::$geometry (View: C:\Users\17329\Desktop\robertfromri\feberr\resources\views\upload-item.blade.php) {"userId":1,"exception":"[object] (ErrorException(code: 0): Undefined property: stdClass::$geometry (View: C:\\Users\\17329\\Desktop\obertfromri\\feberr\esources\\views\\upload-item.blade.php) at C:\\Users\\17329\\Desktop\obertfromri\\feberr\\storage\\framework\\views\\16aa80db4751cadc69bc3838615cc20e57a1fbfc.php:224, ErrorException(code: 0): Undefined property: stdClass::$geometry at C:\\Users\\17329\\Desktop\obertfromri\\feberr\\storage\\framework\\views\\16aa80db4751cadc69bc3838615cc20e57a1fbfc.php:224)
+[stacktrace]
+#0 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 1)
+#1 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\17329\\\\...', Array)
+#2 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(142): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\17329\\\\...', Array)
+#3 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(125): Illuminate\\View\\View->getContents()
+#4 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(90): Illuminate\\View\\View->renderContents()
+#5 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(42): Illuminate\\View\\View->render()
+#6 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\symfony\\http-foundation\\Response.php(205): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#7 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Symfony\\Component\\HttpFoundation\\Response->__construct(Object(Illuminate\\View\\View))
+#8 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(720): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#9 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(680): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#10 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(30): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#11 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\app\\Http\\Middleware\\XSS.php(24): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Feberr\\Http\\Middleware\\XSS->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\app\\Http\\Middleware\\Localization.php(22): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Feberr\\Http\\Middleware\\Localization->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(41): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(43): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(75): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#34 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(66): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(104): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(682): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#40 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(657): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(623): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#42 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(612): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#44 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\fideloper\\proxy\\src\\TrustProxies.php(57): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#46 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#49 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\app\\Http\\Middleware\\CheckReferral.php(20): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#52 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Feberr\\Http\\Middleware\\CheckReferral->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php(62): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#61 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(163): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#62 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#63 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(104): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#65 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\17329\\Desktop\obertfromri\\feberr\\index.php(60): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#67 {main}
+"} 
+[2020-08-11 19:53:04] local.INFO: Request: POST /upload-item HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding:           gzip, deflate, br
+Accept-Language:           en-US,en;q=0.9
+Cache-Control:             max-age=0
+Connection:                keep-alive
+Content-Length:            1776
+Content-Type:              multipart/form-data; boundary=----WebKitFormBoundaryronydyAvI9hWxPgV
+Cookie:                    _ga=GA1.1.1682614939.1595258149; ttlUser=jake%40gmail.com; _gid=GA1.1.1697326603.1597105323; PHPSESSID=19g23do4sacg5a6ub19e9ir1l0; XSRF-TOKEN=eyJpdiI6IlBNdVFXMTNRc3dlUHZidDdcL1VBN2FRPT0iLCJ2YWx1ZSI6IjBGcHh3WWVPR0ZibGtrXC9ybTBBUVlFc3pQdzl5ZEVGaXM2c0hBSHBhQ0w5MWpMZkRXNmt4T1lYY2FKVTVSdG81IiwibWFjIjoiZjgyYWJlNmY3ZGQ0YTlmZGExNGU3MGRmOTQ2MWMzMDkwMjUwODAwODI2MTk5YjdmNzBhN2ZiZDQwMzBiYzIzOCJ9; laravel_session=eyJpdiI6IkJ1YnNnaXhiRHh3R0RLVlNoN0RiVVE9PSIsInZhbHVlIjoiWlY5SUYrVnpTVHl1WXFyaU9Xcm5TcFd5KzZNazdua2VxMHJNMGVrQkxuaUlIV0kwWlVTWXREZ1dzNmU0ZDdueCIsIm1hYyI6IjVmNWNjZmNjZWNkNTc1MDM2NzdiNzZmOTZhMjU5YzUyNWI5NTdkODA1MWRlYWFjOTI0ZWM4NjlhZjIzZWI1MTcifQ%3D%3D
+Host:                      localhost:8000
+Origin:                    http://localhost:8000
+Referer:                   http://localhost:8000/upload-item
+Sec-Fetch-Dest:            document
+Sec-Fetch-Mode:            navigate
+Sec-Fetch-Site:            same-origin
+Sec-Fetch-User:            ?1
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36
+Cookie: _ga=; ttlUser=; _gid=; PHPSESSID=; XSRF-TOKEN=H0UuqVsV42R5yreTfMxd9xd3nE7vyaqY5qxlwsjb; laravel_session=rsxcH0K68l09jny5OPU328AIZP2ilp0bV1U4upJm
+
+  
+[2020-08-11 19:53:04] local.INFO: item: {"name":"aaer","description":"&lt;p&gt;descr&lt;\/p&gt;","geometry":"1","price":"1234555"}  
+[2020-08-11 19:54:01] local.INFO: Request: POST /upload-item HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding:           gzip, deflate, br
+Accept-Language:           en-US,en;q=0.9
+Cache-Control:             max-age=0
+Connection:                keep-alive
+Content-Length:            1753
+Content-Type:              multipart/form-data; boundary=----WebKitFormBoundaryTBmLnHmPbLGggXQz
+Cookie:                    _ga=GA1.1.1682614939.1595258149; ttlUser=jake%40gmail.com; _gid=GA1.1.1697326603.1597105323; PHPSESSID=19g23do4sacg5a6ub19e9ir1l0; XSRF-TOKEN=eyJpdiI6IlpzT1d0OVFwTW4xdXFRbGN6ak1Sa1E9PSIsInZhbHVlIjoiNlY3cjBqU0NJNmVXMWZWcWxKeDE5dFZCMzBvcEJVSm9OUDVFdHdlYllHSnB2bmtcL0kraTh1WGFCMEN0dmlQNDIiLCJtYWMiOiI1YWMzNGQ1ODg0OTNkMDg5MTgzNzQ4ODJlOWU4NDUxZjQwMjNhNDhjNWM2YWY0ZjQyZTUxM2MxYTRlMWQwZTBjIn0%3D; laravel_session=eyJpdiI6ImhEN0NRZ1RzejZRVFNwckxDY1JteEE9PSIsInZhbHVlIjoiZ2FYUWsrOW9iZkJON25BMFd3WTliVE9qeUxvYkNrM2hVcTByOG1GenNoa25GeGRxOHZib2pUaGdXVEVhMFFYViIsIm1hYyI6ImI2ODczMDIzZmVlNjU0ZThjMzIwZjM5NmYyNWE4Y2M5N2M4NjkzZGZiYzBiMzdlNmZiYTY4MDFhZmE4MTBmNzkifQ%3D%3D; _gat=1
+Host:                      localhost:8000
+Origin:                    http://localhost:8000
+Referer:                   http://localhost:8000/upload-item
+Sec-Fetch-Dest:            document
+Sec-Fetch-Mode:            navigate
+Sec-Fetch-Site:            same-origin
+Sec-Fetch-User:            ?1
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36
+Cookie: _ga=; ttlUser=; _gid=; PHPSESSID=; XSRF-TOKEN=H0UuqVsV42R5yreTfMxd9xd3nE7vyaqY5qxlwsjb; laravel_session=rsxcH0K68l09jny5OPU328AIZP2ilp0bV1U4upJm; _gat=
+
+  
+[2020-08-11 19:54:01] local.INFO: item: {"name":"aaer","description":"&lt;p&gt;descr&lt;\/p&gt;","geometry":"1","price":"888"}  
