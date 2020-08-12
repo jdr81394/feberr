@@ -25,7 +25,7 @@ class Items extends Model
 
   public static function getAllUnwrappedUvs()
   {
-    $value = DB::table("unwrapped_uvs")->select("unwrapped_uvs")->get();
+    $value = DB::table("unwrapped_uvs")->get();
     return $value;
   }
 

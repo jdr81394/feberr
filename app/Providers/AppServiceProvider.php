@@ -63,8 +63,8 @@ class AppServiceProvider extends ServiceProvider
 		// $allMediaTypes = Items::getAllMediaTypes();
 		// View::share('media_type', $allMediaTypes);
 
-		// $allUnwrappedUvs = Items::getAllUnwrappedUvs();
-		// View::share('unwrapped_uvs', $allUnwrappedUvs);
+		$allUnwrappedUvs = Items::getAllUnwrappedUvs();
+		View::share('unwrapped_uvs', $allUnwrappedUvs);
 
 		$allGeometry = Items::getAllGeometry();
 		View::share("geometry", $allGeometry);

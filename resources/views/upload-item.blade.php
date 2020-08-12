@@ -213,14 +213,12 @@
 
                                     <div class="form-group">
                                         <label for="unwrapped_uvs">{{ Helper::translation(4851,$translate) }}: <sup>*</sup></label>
-                                        <label class="checkbox-container">Yes
-                                            <input value="1" type="radio" checked="checked" name="unwrapped_uvs">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="checkbox-container">No
-                                            <input value="0" type="radio" name="unwrapped_uvs">
-                                            <span class="checkmark"></span>
-                                        </label>
+                                        <select name="unwrapped_uvs" id="unwrapped_uvs" class="text_field" data-bvalidator="required">
+                                                <option value=""></option>
+                                                @foreach($unwrapped_uvs as $value)
+                                                <option value="{{$value->id}}">{{ $value->unwrapped_uvs }}</option>
+                                                @endforeach
+                                            </select>
                                     </div>
 
                                     <div class="form-group no-margin">
